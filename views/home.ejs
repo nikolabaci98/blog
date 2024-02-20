@@ -1,0 +1,16 @@
+
+<% for(let i = blogPosts.length-1; i >= 0; i--) { %>
+    <% let post = blogPosts[i]; %>
+    <div class="card border-light triple-half">
+        <div class="card-body ">
+          <h4 class="card-title"><%= post.author %></h4>
+          <span class="small"><%= post.time %></span>
+          <p class="card-text"><%= post.text.substring(0, 180) + "..." %> <a href="/blog/<%= post.id %>">more</a></p>
+          
+        </div>
+        <% if(i > 0) { %>
+          <hr>
+        <% } %>
+    </div>
+<% } %>
+<a href="/compose"><button class="floating-button">New</button></a>
