@@ -6,7 +6,7 @@
         </p>
         <h5>----</h5>
         <h5><%= blogPost.author %></h5>
-        <h6><%= blogPost.time %></h6>
+        <h6><%= blogPost.dateposted.toISOString().slice(0, 10) %></h6>
     </div>
     
 </div>
