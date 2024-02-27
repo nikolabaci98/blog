@@ -27,10 +27,10 @@
   bottom: 50px;
   right: 50px;
   z-index: 1000; /* Ensure the button stays on top of other content */
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   border-radius: 70%;
-  background-color: #007bff;
+  background-color: #4267b2;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -38,8 +38,8 @@
 }
 
 .floating-button:hover {
-  width: 85px;
-  height: 85px;
+  width: 60px;
+  height: 60px;
 }
 
 .blog-text {
@@ -47,3 +47,4 @@
   padding-left: 30px;
   font-size: 20px;
 }
+

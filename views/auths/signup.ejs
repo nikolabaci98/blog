@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/3c38570684.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/stylesheets/login.css">
+    </head>
+    <body>
+
+        <section class="prompt">
+            <h2><i class="fa-solid fa-id-card"></i> Sign up</h2>
+            <form  action="/auth/signup/submit" method="POST">
+                <section>
+                    <label for="name">Name:</label>
+                    <input id="name" name="name" type="text" />   
+                </section>
+                <section>
+                    <label for="username">Email:</label>
+                    <input id="username" name="username" type="text" />   
+                </section>
+                <section>
+                    <label for="password">Password:</label>
+                    <input id="password" name="password" type="password" />    
+                </section>
+                <button type="submit">Sign up</button>
+            </form>
+            <p class="help">Have an account? <a href="/auth/login">Login</a></p>
+        </section>
+        <h3><%= msg %></h3>
+    </body>
+</html>

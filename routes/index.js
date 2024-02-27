@@ -1,39 +1,35 @@
 var express = require('express');
 const db = require("../db/db.js");
+const ensureAuthenticated = require("./auth.js").ensureAuthenticated;
 var router = express.Router();
 let blogPosts = [];
 
-
-router.get(["/", "/home"], async (req, res) => {
+router.get(["/", "/home"], ensureAuthenticated, async (req, res) => {
   try {
+    console.log(req.user.username);
     blogPosts = await db.fetchBlogPosts();
     renderPage(res, "home", { blogPosts });
   } catch (error) {
     console.error("Failed to fetch blog posts:", error);
-    // Handle error appropriately, e.g., render an error page
     res.status(500).send("Failed to fetch blog posts");
   }
 });
 
-router.get("/compose", (req, res) => {
+router.get("/compose", ensureAuthenticated, (req, res) => {
+  console.log(req.user);
   renderPage(res, "compose");
 });
 
-router.get(router.get('/blog/:postId', (req, res) => {
+router.get(router.get('/blog/:postId', ensureAuthenticated, (req, res) => {
   const postId = req.params.postId;
   let blogPost = blogPosts.filter(blogPost => blogPost.id.toString() === postId)[0];
   renderPage(res, "blog", blogPost);
 }));
 
-router.post("/submit", async (req, res) => {
-  const queryText = 'INSERT INTO blogs(author, text, dateposted) VALUES($1, $2, $3)'
+router.post("/submit", ensureAuthenticated, async (req, res) => {
   const values = [req.body["authorName"], req.body["blogPost"], getCurrentDateTime()]
-  db.insertBlogPosts(queryText, values);
+  db.insertBlogPosts(values);
   res.redirect("home")
-});
-
-router.use((req, res) => {
-  res.status(404).send('<h1>404 Not Found.</h1>');
 });
 
 function getCurrentDateTime() {
@@ -63,4 +59,5 @@ function renderPage(res, partial, blogPost) {
       });
   }
 }
+
 module.exports = router;

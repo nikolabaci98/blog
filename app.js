@@ -1,12 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const session = require("express-session");
+const passport = require("passport");
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const db = require("./db/db");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth').router;
 
 var app = express();
 
@@ -20,8 +22,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//AUTHENTICATION w/ PASSPORT
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//ROUTERS
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+
 
 //connect to DB
 (async () => {
