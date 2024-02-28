@@ -1,11 +1,11 @@
-document.getElementById('composeForm').addEventListener('submit', function(event) {
+document.getElementById('composeForm').addEventListener('submit', (event) => {
     // Prevent the default form submission
     console.log("VALIDATION PART");
 
     event.preventDefault();
 
     // Validate the input
-    var authorName = document.getElementById('authorName').value;
+    var authorName = document.getElementById('blogTitle').value;
     var text = document.getElementById('blogPost').value;
 
     if (authorName.length >= 3 && text.length >= 3) {

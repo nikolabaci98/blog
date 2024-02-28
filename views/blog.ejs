@@ -1,12 +1,13 @@
 
 <div>
     <div class="blog-text triple-half">
-        <p>
-            <%= blogPost.text %>
-        </p>
+        <h1> <%= blogPost.title %> </h1>
+        <pre>
+            <%= blogPost.text.trim() %>
+        </pre>
         <h5>----</h5>
-        <h5><%= blogPost.author %></h5>
-        <h6><%= blogPost.dateposted.toISOString().slice(0, 10) %></h6>
+        <h5><%= blogPost.name %></h5>
+        <h6><%= blogPost.createdAt.toLocaleDateString() %></h6>
     </div>
     
 </div>

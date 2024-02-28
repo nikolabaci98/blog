@@ -3,10 +3,10 @@
     <% let post = blogPosts[i]; %>
     <div class="card border-light triple-half">
         <div class="card-body ">
-          <h4 class="card-title"><%= post.author %></h4>
+          <h4 class="card-title"><%= post.title %></h4>
           <span class="small"><%= post.time %></span>
           <p class="card-text"><%= post.text.substring(0, 180) + "..." %> <a href="/blog/<%= post.id %>">more</a></p>
-          
+          <span><i><%= post.name %> -- <%= post.createdAt.toLocaleDateString() %></i></span>
         </div>
         <% if(i > 0) { %>
           <hr>

@@ -5,13 +5,21 @@ Simple blog website with no DB intergration.
 Using NodeJS, ExpressJS, EJS in the server side and BootStrap, CSS and HTML in the client side.
 
 Next steps:
-1. Add DB
-2. Add user authentication to allow:
-     - login
-     - edit/delete posts
-     - follow other users
-     - comment on posts
-  
-![image](https://github.com/nikolabaci98/blog/assets/46806109/30799bf9-e275-4b92-b41c-6370bd714e50)
-![image](https://github.com/nikolabaci98/blog/assets/46806109/2f232307-adac-4518-8a9b-96049f6f4c90)
+1. Database Integration
+     [x] Develop schema for user, blogs, comments
+     [x] Integrate Serialize npm package to implement the model of MVC
+     [x] Develop a session db, for persisten user auth across server restarts
 
+2. User Authentication:
+     [x] Login
+          [x] Store user session
+          [x] Error on login
+     [x] Sign up
+          [x] Save new user
+          [x] Error on sign up
+
+3. User Actions:
+     [x] Logout
+     [x] Post blogs
+     [] Delete blogs
+     [] Comment on posts

@@ -4,8 +4,9 @@ const session = require("express-session");
 const passport = require("passport");
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const db = require("./db/db");
+const model = require("./model/index");
+const logger = require("morgan");
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth').router;
@@ -15,12 +16,38 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// EXPRESS-SESSIONS -> USE SEQUELIZE TO STORE USER SESSIONS
+app.use(session({
+  store: new SequelizeStore({
+    db: model.sequelize,
+    tableName: 'Sessions',
+  }),
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: false,
+}));
+
+// DATABASE CONNECTION & SYNC VERIFICATION
+(async () => {
+  try {
+      await model.sequelize.authenticate();
+      console.log('Database connection successful');
+      try {
+          await model.sequelize.sync();
+          console.log('Models SUCCESSFULLY synchronized'); 
+      } catch(err) {
+          console.log('Models FAILED synchronization', err);
+      }
+  } catch (err) {
+      console.error('Database connection error:', err);
+  }
+})();
 
 //AUTHENTICATION w/ PASSPORT
 app.use(session({
@@ -36,17 +63,6 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
-
-//connect to DB
-(async () => {
-  try {
-      await db.connect();
-      console.log('Connected to the database');
-  } catch (error) {
-      console.error('Failed to connect to the database:', error);
-      process.exit(1); // Exit the application if database connection fails
-  }
-})();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

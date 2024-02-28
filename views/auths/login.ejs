@@ -10,7 +10,8 @@
             <form action="/auth/login/submit" method="POST">
                 <section>
                     <label for="username">Email:</label>
-                    <input id="username" name="username" type="text" />   
+                    <input id="username" name="username" type="text" />  
+                    <span id="emailError" class="error-message"></span> 
                 </section>
                 <section>
                     <label for="password">Password:</label>
@@ -20,5 +21,6 @@
             </form>
             <p class="help">Don't have an account? <a href="/auth/signup">Sign up</a></p>
         </section>
+        <h3><%= msg %></h3>
     </body>
 </html>

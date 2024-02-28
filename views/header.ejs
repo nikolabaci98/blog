@@ -7,6 +7,7 @@
         <link href="/stylesheets/style.css" rel="stylesheet">
         <link href="/stylesheets/login.css" rel="stylesheet" >
         <script src="https://kit.fontawesome.com/3c38570684.js" crossorigin="anonymous"></script>
+
         <title>Thought</title>
 
     </head>
@@ -25,8 +26,14 @@
               <li class="nav-item">
                 <a class="nav-link bigger-text" href="/compose"><i class="fa-solid fa-feather"></i> Compose</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link bigger-text" href="/auth/logout"><i class="fa-solid fa-user"></i> Logout</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-user"></i> <%= name %>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                </ul>
               </li>
             </ul>
             

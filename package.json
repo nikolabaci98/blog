@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-session-sequelize": "^7.1.7",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
@@ -16,6 +17,7 @@
     "nodemon": "^3.1.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "sequelize": "^6.37.1"
   }
 }
