@@ -5,10 +5,10 @@ document.getElementById('composeForm').addEventListener('submit', (event) => {
     event.preventDefault();
 
     // Validate the input
-    var authorName = document.getElementById('blogTitle').value;
+    var blogTitle = document.getElementById('blogTitle').value;
     var text = document.getElementById('blogPost').value;
 
-    if (authorName.length >= 3 && text.length >= 3) {
+    if (blogTitle.length >= 3 && text.length >= 3) {
       // Submit the form if validation passes
       event.target.submit();
     } else {
