@@ -1,5 +1,4 @@
 var express = require('express');
-const db = require("../db/db.js");
 const { Blog } = require("../model/index");
 const ensureAuthenticated = require("./auth.js").ensureAuthenticated;
 var router = express.Router();
@@ -8,22 +7,59 @@ let blogPosts = [];
 router.get(["/", "/home"], ensureAuthenticated, async (req, res) => {
   try {
     blogPosts = await Blog.findAll();
-    renderPage(res, "home", { blogPosts }, req.user.name);
+    res.render("./pages/homepage", { user: req.user, blogPosts: blogPosts });
   } catch (error) {
-    console.error("Failed to fetch blog posts:", error);
-    res.status(500).send("Failed to fetch blog posts");
+    res.status(500).send("Cannot retrive the blog posts now. Try later.");
   }
 });
 
 router.get("/compose", ensureAuthenticated, (req, res) => {
-  renderPage(res, "compose", null, req.user.name);
+  res.render("./pages/composePage", { user: req.user });
 });
 
-router.get(router.get('/blog/:postId', ensureAuthenticated, (req, res) => {
+router.get("/profile", ensureAuthenticated, async (req, res) => {
+  try {
+    blogPosts = await Blog.findAll({
+      where: {
+        username: req.user.username
+      }
+    });
+    res.render("./pages/profilePage", { user: req.user, blogPosts: blogPosts });
+  } catch (error) {
+    res.status(500).send("Cannot retrive the blog posts now. Try later.");
+  }
+});
+
+router.get(router.get('/blog/:postId', ensureAuthenticated, async (req, res) => {
   const postId = req.params.postId;
-  let blogPost = blogPosts.filter(blogPost => blogPost.id.toString() === postId)[0];
-  renderPage(res, "blog", blogPost, req.user.name);
+  try {
+    const row = await Blog.findAll({
+      where: {
+        id: postId
+      }
+    });
+    res.render("./pages/blogpage", { user: req.user, blogPost: row[0] });
+  } catch (err) {
+    res.status(500).send(`Cannot find blog post with id = ${postId}. Try later.`);
+  }
 }));
+
+router.get('/delete/:postId', ensureAuthenticated, async (req, res) => {
+  console.log("Delete 5")
+  const postId = req.params.postId;
+
+  try {
+    await Blog.destroy({
+      where: {
+        id: postId
+      }
+    });
+    res.redirect("/profile");
+  } catch (err) {
+    res.status(500).send(`Cannot find blog post with id = ${postId}. Try later.`);
+  }
+});
+
 
 router.post("/submit", ensureAuthenticated, async (req, res) => {
   try {
@@ -35,30 +71,8 @@ router.post("/submit", ensureAuthenticated, async (req, res) => {
     });
     res.redirect("home");
   } catch (err) {
-    console.log("Error on saving blog", err);
+    res.status(500).send(`Cannot save your blog post now. Try later.`);
   }
-  
 });
-
-function renderPage(res, partial, blogPost, name) {
-  if(partial === "home"){
-      res.render("index.ejs", {
-          filename: partial,
-          name: name,
-          blogPosts: blogPosts
-      });
-  } else if(partial === "blog") {
-      res.render("index.ejs", {
-          filename: partial,
-          name: name,
-          blogPost: blogPost
-      });
-  } else {
-      res.render("index.ejs", {
-          filename: partial,
-          name: name
-      });
-  }
-}
 
 module.exports = router;

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html class="middle-half">
+    <%- include('../components/head.ejs') %>
+    <body>
+        <%- include('../components/navbar.ejs') %>
+        <div class="blog-text triple-half">
+            <h1> <%= blogPost.title %> </h1>
+            <pre>
+                <%= blogPost.text %>
+            </pre>
+            <h5>----</h5>
+            <h5><%= blogPost.name %></h5>
+            <h6><%= blogPost.createdAt.toLocaleDateString() %></h6>
+        </div>
+    </body>
+    <%- include('../components/footer.ejs') %>
+</html>

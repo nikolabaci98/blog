@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html class="middle-half">
+    <%- include('../components/head.ejs') %>
+    <body>
+        <%- include('../components/navbar.ejs') %>
+        <% for(let i = blogPosts.length-1; i >= 0; i--) { %>
+            <% let post = blogPosts[i]; %>
+            <div class="card border-light">
+                <div class="card-body ">
+                  <h4 class="card-title"><%= post.title %></h4>
+                  <span class="small"><%= post.time %></span>
+                  <pre class="card-text"><%= post.text.substring(0, 90) + "..." %> <a href="/blog/<%= post.id %>">more</a></pre>
+                  <span><i><%= post.name %> -- <%= post.createdAt.toLocaleDateString() %></i></span>
+                </div>
+                <% if(i > 0) { %>
+                  <hr>
+                <% } %>
+            </div>
+        <% } %>
+        <a href="/compose"><button class="floating-button"><i class="fa-solid fa-feather"></i></button></a>
+        
+    </body>
+    <%- include('../components/footer.ejs') %>
+</html>

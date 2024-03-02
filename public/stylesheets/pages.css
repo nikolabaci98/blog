@@ -48,3 +48,28 @@
   font-size: 20px;
 }
 
+footer {
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.trash-can-container {
+  margin-left: 20px; /* Adjust margin as needed */
+}
+
+.trash-can-container:hover {
+  color: red;
+}
+
+.profile-info {
+  margin-left: 30px;
+  margin-top: 30px;
+
+}
+
+pre {
+  white-space: pre-wrap;
+}
