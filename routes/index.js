@@ -16,7 +16,7 @@ router.get(["/", "/home"], ensureAuthenticated, async (req, res) => {
 });
 
 router.get("/compose", ensureAuthenticated, (req, res) => {
-  renderPage(res, "compose", req.user.name);
+  renderPage(res, "compose", null, req.user.name);
 });
 
 router.get(router.get('/blog/:postId', ensureAuthenticated, (req, res) => {

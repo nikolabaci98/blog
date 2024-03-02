@@ -10,7 +10,7 @@ document.getElementById('composeForm').addEventListener('submit', (event) => {
 
     if (authorName.length >= 3 && text.length >= 3) {
       // Submit the form if validation passes
-      this.submit();
+      event.target.submit();
     } else {
       // Display an error message or perform any other action
       alert("Input must be at least 3 characters long.");
