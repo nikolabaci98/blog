@@ -4,10 +4,10 @@ const ensureAuthenticated = require("./auth.js").ensureAuthenticated;
 var router = express.Router();
 let blogPosts = [];
 
-router.get(["/", "/home"], ensureAuthenticated, async (req, res) => {
+router.get(["/", "/home"], async (req, res) => {
   try {
     blogPosts = await Blog.findAll();
-    res.render("./pages/homepage", { user: req.user, blogPosts: blogPosts });
+    res.render("./pages/homepage", { user: req.user !== undefined ? req.user : "", blogPosts: blogPosts });
   } catch (error) {
     res.status(500).send("Cannot retrive the blog posts now. Try later.");
   }

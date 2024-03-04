@@ -6,7 +6,7 @@
         <div class="profile-info">
             <h2><%= user.name %></h2>
             <h5>Email: <%= user.username %></h5>
-            <h5>Posts #: <%= blogPosts.length %></h5>
+            <h5>Posts: <%= blogPosts.length %></h5>
         </div>
        
 
@@ -22,7 +22,7 @@
                 </div>
                 <div class="trash-can-container">
                     <a href="/delete/<%= post.id %>">
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i class="fa-solid fa-trash-can trash-can-container"></i>
                     </a>
                 </div>
                 <% if(i > 0) { %>

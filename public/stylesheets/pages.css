@@ -57,7 +57,7 @@ footer {
 }
 
 .trash-can-container {
-  margin-left: 20px; /* Adjust margin as needed */
+  margin-left: 10px; /* Adjust margin as needed */
 }
 
 .trash-can-container:hover {
@@ -65,7 +65,7 @@ footer {
 }
 
 .profile-info {
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 30px;
 
 }
