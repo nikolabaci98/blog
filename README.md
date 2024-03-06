@@ -34,3 +34,5 @@ Using Node.js, Express.js, EJS on the server-side, and Bootstrap, CSS, and HTML 
 
 - [x] Reorganize and clear EJS file
 
+### 5. Change UI from html to React
+

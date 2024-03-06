@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const model = require("./model/index");
 const logger = require("morgan");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+require('dotenv').config();
+
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth').router;
@@ -28,7 +30,7 @@ app.use(session({
     db: model.sequelize,
     tableName: 'Sessions',
   }),
-  secret: 'your_secret_key',
+  secret: process.env.DB_SECRET,
   resave: false,
   saveUninitialized: false,
 }));
@@ -51,7 +53,7 @@ app.use(session({
 
 //AUTHENTICATION w/ PASSPORT
 app.use(session({
-  secret: 'your_secret_key',
+  secret: process.env.AUTH_SECRET,
   resave: false,
   saveUninitialized: false
 }));

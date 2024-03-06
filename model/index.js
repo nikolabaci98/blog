@@ -1,8 +1,9 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
-const sequelize = new Sequelize("postgres://postgres:8991@localhost:5000/blog");
+const sequelize = new Sequelize(process.env.DB_URL);
 
 
 const User = sequelize.define("User",
