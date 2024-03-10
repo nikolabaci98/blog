@@ -34,5 +34,5 @@ Using Node.js, Express.js, EJS on the server-side, and Bootstrap, CSS, and HTML 
 
 - [x] Reorganize and clear EJS file
 
-(Video walkthrough)["blog_walkthrough.mp4"]
+[Video walkthrough]("blog_walkthrough.mp4")
 
